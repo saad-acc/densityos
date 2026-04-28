@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DensityOS — A timing layer for the data center you already own</title>
+  <meta name="description" content="DensityOS governs when workloads execute at the host level. No code changes, no new hardware. Claimed benchmark: +43.9% throughput, −80.5% P95 tail latency." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav-container" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="brand" aria-label="DensityOS home">
+      <svg class="brand-mark" viewBox="0 0 128 140" aria-hidden="true">
+        <rect x="64" y="15" width="40" height="110" rx="7" ry="7" fill="none" stroke="currentColor" stroke-width="8" stroke-linejoin="round"></rect>
+        <line x1="64" y1="42.5" x2="104" y2="42.5" stroke="currentColor" stroke-width="8"></line>
+        <line x1="64" y1="70" x2="104" y2="70" stroke="currentColor" stroke-width="8"></line>
+        <line x1="64" y1="97.5" x2="104" y2="97.5" stroke="currentColor" stroke-width="8"></line>
+        <line x1="10" y1="42.5" x2="38" y2="42.5" stroke="currentColor" stroke-width="8" opacity="0.5" stroke-linecap="round"></line>
+        <line x1="10" y1="70" x2="38" y2="70" stroke="currentColor" stroke-width="8" opacity="0.5" stroke-linecap="round"></line>
+        <line x1="10" y1="97.5" x2="38" y2="97.5" stroke="currentColor" stroke-width="8" opacity="0.5" stroke-linecap="round"></line>
+        <line x1="112" y1="70" x2="126" y2="70" stroke="currentColor" stroke-width="8" stroke-linecap="round"></line>
+      </svg>
+      <span class="brand-wordmark">Density<em>OS</em></span>
+      <span class="brand-meta">Infrastructure · Timing · Layer</span>
+    </a>
+    <button class="nav-menu-btn" id="nav-menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="nav-links" id="nav-links">
+      <a href="how-it-works.html">How it works</a>
+      <a href="poc-signup.html" class="button button-primary" data-analytics="nav-request-poc">Request POC <span class="arrow">→</span></a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="container">
+      <span class="hero-kicker">Problem · 01</span>
+      <h1 id="hero-heading">Lift the density ceiling <em>of your data center</em>.</h1>
+      <p class="hero-sub">DensityOS is <span class="signal-mark">a timing layer for the data center you already own</span>. It governs when work executes at the host level — no code changes, no new hardware. Productive work up. Latency and failures down.</p>
+      <div class="hero-ctas">
+        <a href="poc-signup.html" class="button button-primary button-lg" data-analytics="hero-request-poc">Request POC <span class="arrow">→</span></a>
+        <a href="how-it-works.html" class="button button-ghost button-lg" data-analytics="hero-how-it-works">How it works</a>
+      </div>
+
+      <div class="hero-stats" aria-label="Benchmark results">
+        <div class="hero-stat">
+          <span class="label">Throughput</span>
+          <span class="value"><em>↑ 43.9</em>%</span>
+          <span class="sub">Requests per second</span>
+        </div>
+        <div class="hero-stat">
+          <span class="label">P95 tail latency</span>
+          <span class="value"><em>↓ 80.5</em>%</span>
+          <span class="sub">vs. baseline</span>
+        </div>
+        <div class="hero-stat">
+          <span class="label">Contention failures</span>
+          <span class="value"><em>↓ 100</em>%</span>
+          <span class="sub">Driven by timing</span>
+        </div>
+        <div class="hero-stat">
+          <span class="label">Productive CPU</span>
+          <span class="value"><em>↑ 10</em>%</span>
+          <span class="sub">Existing hardware</span>
+        </div>
+      </div>
+
+      <!-- Calculator -->
+      <div class="calculator" role="region" aria-label="Revenue impact calculator">
+        <div class="calculator-head">
+          <p class="title">Revenue impact <em>calculator</em></p>
+          <span class="label">Capacity · Annualised</span>
+        </div>
+        <div class="calculator-body">
+          <div class="calculator-inputs">
+            <div class="slider-field">
+              <div class="slider-label-row">
+                <label class="slider-label" for="cores">Cores</label>
+                <span class="slider-value" id="cores-display" aria-live="polite">10,000</span>
+              </div>
+              <input type="range" id="cores" name="cores" min="1000" max="100000" step="1000" value="10000" />
+            </div>
+            <div class="slider-field">
+              <div class="slider-label-row">
+                <label class="slider-label" for="utilization">Current utilisation</label>
+                <span class="slider-value" id="utilization-display" aria-live="polite">68%</span>
+              </div>
+              <input type="range" id="utilization" name="utilization" min="40" max="85" step="1" value="68" />
+            </div>
+            <div class="slider-field">
+              <div class="slider-label-row">
+                <label class="slider-label" for="rate">Rate · core-hour</label>
+                <span class="slider-value" id="rate-display" aria-live="polite">$0.15</span>
+              </div>
+              <input type="range" id="rate" name="rate" min="0.05" max="0.50" step="0.01" value="0.15" />
+            </div>
+          </div>
+          <div class="calculator-output" aria-live="polite">
+            <div class="calc-row">
+              <span class="calc-row-label">Current revenue</span>
+              <span class="calc-row-value" id="current-revenue">—</span>
+            </div>
+            <div class="calc-row">
+              <span class="calc-row-label">With DensityOS · 88%</span>
+              <span class="calc-row-value" id="tws-revenue">—</span>
+            </div>
+            <div class="calc-highlight">
+              <span class="calc-highlight-label">Additional · annual</span>
+              <span class="calc-highlight-value" id="additional-revenue">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="section section-surface" aria-labelledby="problem-heading">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-kicker">Problem · 02</span>
+        <div>
+          <h2 id="problem-heading">Contention limits throughput in multi-tenant infrastructure.</h2>
+          <p class="section-sub">Four failure modes, all driven by the same root cause — competing workloads hitting the same resources at microsecond precision.</p>
+        </div>
+      </div>
+
+      <div class="problem-grid" role="list">
+
+        <div class="problem-card" role="listitem" tabindex="0" aria-expanded="false">
+          <span class="card-idx">Fault · <span class="num">01</span></span>
+          <h3 class="card-headline">Capacity sits <em>idle for safety</em>.</h3>
+          <p class="card-desc">Workload collisions degrade performance. You maintain buffer capacity to prevent interference — cores you bought but cannot bill.</p>
+          <div class="card-metric">
+            <span class="big">68<em>%</em></span>
+            <span class="unit">Typical util. · 32% idle</span>
+          </div>
+          <div class="card-expand">
+            <span>Expand</span>
+            <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="expanded-content">
+            <div>
+              <p class="expanded-section-label">Symptom</p>
+              <p class="problem-box">When Customer A's workload peaks at the same moment as Customer B's, both experience slowdowns. Operations solves this by leaving 30%+ headroom — cores that generate zero revenue but prevent SLA breaches.</p>
+            </div>
+            <div>
+              <p class="expanded-section-label solution-label">With DensityOS</p>
+              <p class="solution-box">Safe to run at <strong>88%</strong> utilisation. DensityOS prevents timing collisions by governing when workloads execute. Same hardware, no interference, 20 points more capacity you can bill.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="problem-card" role="listitem" tabindex="0" aria-expanded="false">
+          <span class="card-idx">Fault · <span class="num">02</span></span>
+          <h3 class="card-headline">Failures under <em>peak load</em>.</h3>
+          <p class="card-desc">Resource contention causes request failures when multiple tenants hit the same resources simultaneously.</p>
+          <div class="card-metric">
+            <span class="big">12–18<em>%</em></span>
+            <span class="unit">Baseline failure rate</span>
+          </div>
+          <div class="card-expand">
+            <span>Expand</span>
+            <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="expanded-content">
+            <div>
+              <p class="expanded-section-label">Symptom</p>
+              <p class="problem-box">Three tenants hit the same memory controller at microsecond precision. One gets the resource, two wait or fail. You issue SLA credits and customers escalate.</p>
+            </div>
+            <div>
+              <p class="expanded-section-label solution-label">With DensityOS</p>
+              <p class="solution-box"><strong>0%</strong> contention-driven failures. DensityOS staggers colliding requests by microseconds, eliminating failures at the resource level.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="problem-card" role="listitem" tabindex="0" aria-expanded="false">
+          <span class="card-idx">Fault · <span class="num">03</span></span>
+          <h3 class="card-headline">Unpredictable <em>performance</em>.</h3>
+          <p class="card-desc">Same workload delivers inconsistent results due to timing-based interference from neighbouring tenants.</p>
+          <div class="card-metric">
+            <span class="big">76<em>%</em></span>
+            <span class="unit">Runtime variance</span>
+          </div>
+          <div class="card-expand">
+            <span>Expand</span>
+            <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="expanded-content">
+            <div>
+              <p class="expanded-section-label">Symptom</p>
+              <p class="problem-box">Same job runs in 2.1 hours one time, 3.7 hours the next. The customer can't trust your SLAs or charge predictable pricing downstream.</p>
+            </div>
+            <div>
+              <p class="expanded-section-label solution-label">With DensityOS</p>
+              <p class="solution-box">Consistent runtime, every time. DensityOS eliminates timing variance by preventing neighbour interference — same cadence, predictable performance.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="problem-card" role="listitem" tabindex="0" aria-expanded="false">
+          <span class="card-idx">Fault · <span class="num">04</span></span>
+          <h3 class="card-headline">Power density <em>constraints</em>.</h3>
+          <p class="card-desc">Simultaneous workload spikes push racks over power budgets, limiting how many nodes you can deploy per kW.</p>
+          <div class="card-metric">
+            <span class="big">+20<em>%</em></span>
+            <span class="unit">Peak draw over budget</span>
+          </div>
+          <div class="card-expand">
+            <span>Expand</span>
+            <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="expanded-content">
+            <div>
+              <p class="expanded-section-label">Symptom</p>
+              <p class="problem-box">Tenants hit CPU and memory simultaneously; power draw spikes 20% above budget. You leave physical slots empty because the power infrastructure can't handle synchronous peaks.</p>
+            </div>
+            <div>
+              <p class="expanded-section-label solution-label">With DensityOS</p>
+              <p class="solution-box">De-synchronised execution smooths power draw. Peak stays within budget even with more nodes deployed — physical rack capacity you couldn't use before.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Before / After -->
+  <section class="section" aria-labelledby="comparison-heading">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-kicker">Approach · 03</span>
+        <div>
+          <h2 id="comparison-heading">DensityOS governs <em>timing</em> — not execution order.</h2>
+          <p class="section-sub">Timing offsets at the host level de-synchronise competing requests. The workload does not change. Only when it runs changes.</p>
+        </div>
+      </div>
+
+      <div class="comparison-grid">
+        <div class="comparison-panel without" role="img" aria-label="Without DensityOS: collisions, 15% failure rate">
+          <span class="comparison-label">Without DensityOS</span>
+          <div class="workload-viz" aria-hidden="true">
+            <div class="workload-bar bar-a"></div>
+            <div class="workload-bar bar-b"></div>
+            <span class="collision-mark">×</span>
+            <div class="viz-ruler"></div>
+            <div class="viz-time"><span>t₀</span><span>t + Δ</span></div>
+          </div>
+          <p class="body-sm" style="color: var(--fg-muted);">Two tenants hit the same resource. One wins, one waits or fails.</p>
+          <div class="comparison-metric">
+            <span class="big">15%</span>
+            <span class="unit">Failure rate</span>
+          </div>
+        </div>
+
+        <div class="comparison-panel with-tws" role="img" aria-label="With DensityOS: staggered execution, 0% failure rate">
+          <span class="comparison-label">With DensityOS</span>
+          <div class="workload-viz" aria-hidden="true">
+            <div class="workload-bar bar-a"></div>
+            <div class="workload-bar bar-b"></div>
+            <div class="viz-ruler"></div>
+            <div class="viz-time"><span>t₀</span><span>t + Δ</span></div>
+          </div>
+          <p class="body-sm" style="color: var(--fg-muted);">Microsecond timing offsets de-synchronise without changing execution order.</p>
+          <div class="comparison-metric">
+            <span class="big">0%</span>
+            <span class="unit">Failure rate</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box" style="margin-top: 24px;">
+        <p><strong>Host-level, not tenant-level.</strong> DensityOS injects timing delays at the infrastructure layer. No tenant code changes. No visibility into tenant data.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- POC Section -->
+  <section class="cta-section" aria-labelledby="poc-heading">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-kicker">POC · 04</span>
+        <div>
+          <h2 id="poc-heading">A 30-day POC on <em>your</em> infrastructure.</h2>
+          <p class="section-sub">We work with a limited number of data-center operators to validate DensityOS against different infrastructure profiles. You see numbers from your fleet, not ours.</p>
+        </div>
+      </div>
+
+      <ul class="poc-features" role="list">
+        <li>
+          <span class="step-label">Week 01</span>
+          <span class="step-text">Deploy DensityOS on your cluster — no tenant-side changes.</span>
+        </li>
+        <li>
+          <span class="step-label">Weeks 01–02</span>
+          <span class="step-text">Baseline measurement, then active deployment.</span>
+        </li>
+        <li>
+          <span class="step-label">Week 04</span>
+          <span class="step-text">Throughput, failure rate, and utilisation deltas, reported against your baseline.</span>
+        </li>
+      </ul>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top: var(--sp-8); gap: var(--sp-5); flex-wrap: wrap;">
+        <p class="label">Limited POC availability · 2025</p>
+        <a href="poc-signup.html" class="button button-primary button-lg" data-analytics="poc-request-cta">Request POC <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="brand" style="margin-bottom: var(--sp-2);">
+        <svg class="brand-mark" viewBox="0 0 128 140" aria-hidden="true">
+          <rect x="64" y="15" width="40" height="110" rx="7" ry="7" fill="none" stroke="currentColor" stroke-width="8" stroke-linejoin="round"></rect>
+          <line x1="64" y1="42.5" x2="104" y2="42.5" stroke="currentColor" stroke-width="8"></line>
+          <line x1="64" y1="70" x2="104" y2="70" stroke="currentColor" stroke-width="8"></line>
+          <line x1="64" y1="97.5" x2="104" y2="97.5" stroke="currentColor" stroke-width="8"></line>
+          <line x1="10" y1="42.5" x2="38" y2="42.5" stroke="currentColor" stroke-width="8" opacity="0.5" stroke-linecap="round"></line>
+          <line x1="10" y1="70" x2="38" y2="70" stroke="currentColor" stroke-width="8" opacity="0.5" stroke-linecap="round"></line>
+          <line x1="10" y1="97.5" x2="38" y2="97.5" stroke="currentColor" stroke-width="8" opacity="0.5" stroke-linecap="round"></line>
+          <line x1="112" y1="70" x2="126" y2="70" stroke="currentColor" stroke-width="8" stroke-linecap="round"></line>
+        </svg>
+        <span class="brand-wordmark">Density<em>OS</em></span>
+      </a>
+      <p class="footer-tag"><em>A timing layer for the data center you already own.</em></p>
+    </div>
+    <div class="footer-col">
+      <h5>Product</h5>
+      <ul>
+        <li><a href="how-it-works.html">How it works</a></li>
+        <li><a href="poc-signup.html">Request POC</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">Acceltra GmbH</a></li>
+        <li><a href="#">Berlin, DE</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <span>© 2026 Acceltra GmbH · DensityOS</span>
+    <span>Infrastructure · Timing · Layer</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
