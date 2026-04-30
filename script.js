@@ -133,3 +133,77 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
+
+/* =========================================================
+   For Data Centers — page-specific interactions
+   ========================================================= */
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  // ---------- Gauge bar fills (animate in on load) ----------
+  const gauges = document.querySelectorAll('.gauge-bar');
+  requestAnimationFrame(function () {
+    gauges.forEach(function (g) {
+      const fill = g.querySelector('.gauge-bar-fill');
+      const pct = parseFloat(g.getAttribute('data-fill') || '0');
+      if (fill) fill.style.width = pct + '%';
+    });
+  });
+
+  // ---------- Hosting capacity calculator ----------
+  const serversEl   = document.getElementById('dc-servers');
+  const customersEl = document.getElementById('dc-customers');
+  const arpuEl      = document.getElementById('dc-arpu');
+
+  if (serversEl && customersEl && arpuEl) {
+    const DENSITY_UPLIFT = 0.50;
+
+    function fmtMoney(v) {
+      if (v >= 1000000000) return '$' + (v / 1000000000).toFixed(2) + 'B';
+      if (v >= 1000000)    return '$' + (v / 1000000).toFixed(1) + 'M';
+      if (v >= 1000)       return '$' + (v / 1000).toFixed(0) + 'K';
+      return '$' + Math.round(v).toLocaleString();
+    }
+    function fmtCount(v) {
+      if (v >= 1000000) return (v / 1000000).toFixed(2) + 'M';
+      if (v >= 1000)    return (v / 1000).toFixed(1) + 'K';
+      return Math.round(v).toLocaleString();
+    }
+    function fillTrack(slider, min, max) {
+      const pct = ((slider.value - min) / (max - min)) * 100;
+      slider.style.background =
+        'linear-gradient(to right, var(--accent) ' + pct + '%, var(--grid) ' + pct + '%)';
+    }
+
+    function calcDC() {
+      const servers    = parseInt(serversEl.value, 10);
+      const custPerSv  = parseInt(customersEl.value, 10);
+      const arpu       = parseFloat(arpuEl.value);
+
+      const totalCustomers    = servers * custPerSv;
+      const upgradedCustomers = Math.round(totalCustomers * (1 + DENSITY_UPLIFT));
+      const extraCustomers    = upgradedCustomers - totalCustomers;
+
+      const annualCurrent  = totalCustomers    * arpu * 12;
+      const annualUpgraded = upgradedCustomers * arpu * 12;
+      const delta          = annualUpgraded - annualCurrent;
+
+      document.getElementById('dc-servers-display').textContent   = servers.toLocaleString();
+      document.getElementById('dc-customers-display').textContent = custPerSv.toString();
+      document.getElementById('dc-arpu-display').textContent      = '$' + Math.round(arpu);
+      document.getElementById('dc-current').textContent           = fmtMoney(annualCurrent);
+      document.getElementById('dc-upgraded').textContent          = fmtMoney(annualUpgraded);
+      document.getElementById('dc-extra-customers').textContent   = '+' + fmtCount(extraCustomers);
+      document.getElementById('dc-additional').textContent        = '+' + fmtMoney(delta);
+
+      fillTrack(serversEl,   100, 20000);
+      fillTrack(customersEl, 2,   40);
+      fillTrack(arpuEl,      10,  200);
+    }
+
+    [serversEl, customersEl, arpuEl].forEach(function (s) {
+      s.addEventListener('input', calcDC);
+    });
+    calcDC();
+  }
+});
