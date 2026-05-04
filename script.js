@@ -76,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const pocForm = document.getElementById('poc-form');
   if (pocForm) {
     const requiredFields = ['company-name','website','your-name','role','email','cluster-size','challenges','timeframe'];
+    const submitBtn = pocForm.querySelector('button[type="submit"]');
 
     function showError(field, msg) {
       field.style.borderColor = 'var(--accent)';
@@ -105,7 +106,35 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    pocForm.addEventListener('submit', function (e) {
+    function getCheckedValues(name) {
+      return Array.from(pocForm.querySelectorAll('input[name="' + name + '"]:checked')).map(function (el) {
+        return el.value;
+      });
+    }
+
+    function setSubmitState(isBusy) {
+      if (!submitBtn) return;
+      submitBtn.disabled = isBusy;
+      submitBtn.setAttribute('aria-busy', isBusy ? 'true' : 'false');
+      submitBtn.style.opacity = isBusy ? '0.7' : '';
+      submitBtn.style.cursor = isBusy ? 'not-allowed' : '';
+    }
+
+    function renderSuccess() {
+      pocForm.style.display = 'none';
+      const success = document.createElement('div');
+      success.className = 'card';
+      success.style.borderColor = 'var(--accent)';
+      success.innerHTML = [
+        '<p class="card-head" style="color: var(--accent); border-color: var(--accent);">Request received</p>',
+        '<h3 style="font-family: var(--font-display); font-weight: 600; font-size: 28px; line-height: 1.2; letter-spacing: -0.005em; margin-bottom: var(--sp-4);">Thank you. <em style="font-style: normal; font-weight: 600; color: var(--accent);">We\\u2019ll be in touch.</em></h3>',
+        '<p style="color: var(--fg-muted); max-width: 52ch;">We review every request and will respond within 48 hours to schedule an intro call and scope the baseline measurement.</p>',
+        '<p class="label" style="margin-top: var(--sp-6);">Next step · Intro call</p>'
+      ].join('');
+      pocForm.parentNode.appendChild(success);
+    }
+
+    pocForm.addEventListener('submit', async function (e) {
       e.preventDefault();
       let ok = true;
       requiredFields.forEach(function (id) {
@@ -117,18 +146,60 @@ document.addEventListener('DOMContentLoaded', function () {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (emailField.value && !re.test(emailField.value)) { ok = false; showError(emailField, 'Invalid email'); }
       }
-      if (ok) {
-        pocForm.style.display = 'none';
-        const success = document.createElement('div');
-        success.className = 'card';
-        success.style.borderColor = 'var(--accent)';
-        success.innerHTML = [
-          '<p class="card-head" style="color: var(--accent); border-color: var(--accent);">Request received</p>',
-          '<h3 style="font-family: var(--font-display); font-weight: 600; font-size: 28px; line-height: 1.2; letter-spacing: -0.005em; margin-bottom: var(--sp-4);">Thank you. <em style="font-style: normal; font-weight: 600; color: var(--accent);">We\u2019ll be in touch.</em></h3>',
-          '<p style="color: var(--fg-muted); max-width: 52ch;">We review every request and will respond within 48 hours to schedule an intro call and scope the baseline measurement.</p>',
-          '<p class="label" style="margin-top: var(--sp-6);">Next step · Intro call</p>'
-        ].join('');
-        pocForm.parentNode.appendChild(success);
+      if (!ok) return;
+
+      const endpoint = (pocForm.getAttribute('data-endpoint') || '').trim();
+      if (!endpoint) {
+        alert('POC form endpoint is not configured yet. Add your Google Apps Script URL to data-endpoint on #poc-form.');
+        return;
+      }
+
+      const payload = {
+        submittedAt: new Date().toISOString(),
+        sourcePage: window.location.pathname || 'poc-signup.html',
+        companyName: (document.getElementById('company-name') || {}).value || '',
+        website: (document.getElementById('website') || {}).value || '',
+        yourName: (document.getElementById('your-name') || {}).value || '',
+        role: (document.getElementById('role') || {}).value || '',
+        email: (document.getElementById('email') || {}).value || '',
+        phone: (document.getElementById('phone') || {}).value || '',
+        clusterSize: (document.getElementById('cluster-size') || {}).value || '',
+        workloadTypes: getCheckedValues('workload-types'),
+        infraTypes: getCheckedValues('infra-types'),
+        challenges: (document.getElementById('challenges') || {}).value || '',
+        timeframe: (document.getElementById('timeframe') || {}).value || '',
+        honeypot: (pocForm.elements['company-fax'] || {}).value || ''
+      };
+
+      try {
+        setSubmitState(true);
+        const isFileProtocol = window.location.protocol === 'file:';
+
+        if (isFileProtocol) {
+          // Local file:// testing path
+          await fetch(endpoint, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+          });
+        } else {
+          // Production/GitHub Pages path
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+          });
+          if (!response.ok) {
+            throw new Error('Submission failed with status ' + response.status);
+          }
+        }
+        renderSuccess();
+      } catch (err) {
+        console.error(err);
+        alert('Submission failed. Please try again in a moment or contact us directly.');
+      } finally {
+        setSubmitState(false);
       }
     });
   }

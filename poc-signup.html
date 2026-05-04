@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request POC — DensityOS</title>
+  <meta name="description" content="Request a 30-day DensityOS proof of concept on your infrastructure. Limited availability for 2025." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav-container" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="brand" aria-label="DensityOS home">
+      <svg class="brand-mark" viewBox="0 0 128 140" aria-hidden="true">
+        <rect x="64" y="15" width="40" height="110" rx="7" ry="7" fill="none" stroke="currentColor" stroke-width="8" stroke-linejoin="round"></rect>
+        <line x1="64" y1="42.5" x2="104" y2="42.5" stroke="currentColor" stroke-width="8"></line>
+        <line x1="64" y1="70" x2="104" y2="70" stroke="currentColor" stroke-width="8"></line>
+        <line x1="64" y1="97.5" x2="104" y2="97.5" stroke="currentColor" stroke-width="8"></line>
+        <line x1="10" y1="42.5" x2="38" y2="42.5" stroke="currentColor" stroke-width="8" opacity="0.5" stroke-linecap="round"></line>
+        <line x1="10" y1="70" x2="38" y2="70" stroke="currentColor" stroke-width="8" opacity="0.5" stroke-linecap="round"></line>
+        <line x1="10" y1="97.5" x2="38" y2="97.5" stroke="currentColor" stroke-width="8" opacity="0.5" stroke-linecap="round"></line>
+        <line x1="112" y1="70" x2="126" y2="70" stroke="currentColor" stroke-width="8" stroke-linecap="round"></line>
+      </svg>
+      <span class="brand-wordmark">Density<em>OS</em></span>
+      <span class="brand-meta">Infrastructure · Timing · Layer</span>
+    </a>
+    <button class="nav-menu-btn" id="nav-menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="nav-links" id="nav-links">
+      <a href="for-data-centers.html">For data centers</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="poc-signup.html" class="button button-primary" aria-current="page" data-analytics="nav-request-poc">Request POC <span class="arrow">→</span></a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" style="padding-bottom: var(--sp-9);">
+    <div class="container">
+      <span class="hero-kicker">POC · Request</span>
+      <h1>Request a <em>30-day</em> POC.</h1>
+      <p class="hero-sub">We work with a limited number of data-center operators to validate DensityOS across different infrastructure profiles. Tell us about your fleet — we'll respond within 48 hours.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: var(--sp-10); align-items: start;" class="poc-layout">
+
+        <div>
+          <form id="poc-form" novalidate aria-label="POC application form" data-endpoint="https://script.google.com/macros/s/AKfycbyB1nwXnzZz_Gd47YAYlT-tAyujX9_phxhmS1NFzZS7a1lV0Lip-BnKLQkJLdNvpxnP/exec">
+            <input type="text" name="company-fax" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true" />
+
+            <p class="form-section-heading">Company · 01</p>
+            <div class="form-group">
+              <div class="form-field">
+                <label for="company-name">Company <span class="required">*</span></label>
+                <input type="text" id="company-name" name="company-name" required autocomplete="organization" placeholder="Acme Datacenters" />
+              </div>
+              <div class="form-field">
+                <label for="website">Website <span class="required">*</span></label>
+                <input type="text" id="website" name="website" required autocomplete="url" placeholder="acme.com" />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-field">
+                <label for="your-name">Your name <span class="required">*</span></label>
+                <input type="text" id="your-name" name="your-name" required autocomplete="name" placeholder="Jane Smith" />
+              </div>
+              <div class="form-field">
+                <label for="role">Role <span class="required">*</span></label>
+                <input type="text" id="role" name="role" required autocomplete="organization-title" placeholder="VP Data Center Ops" />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-field">
+                <label for="email">Email <span class="required">*</span></label>
+                <input type="email" id="email" name="email" required autocomplete="email" placeholder="jane@acme.com" />
+              </div>
+              <div class="form-field">
+                <label for="phone">Phone <span class="optional">optional</span></label>
+                <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+1 (555) 000-0000" />
+              </div>
+            </div>
+
+            <p class="form-section-heading">Infrastructure · 02</p>
+            <div class="form-field">
+              <label for="cluster-size">Approximate cluster size <span class="required">*</span></label>
+              <input type="text" id="cluster-size" name="cluster-size" required placeholder="e.g. 10,000 cores · 500 nodes" />
+            </div>
+
+            <div class="form-field">
+              <fieldset style="border: none; padding: 0;">
+                <legend style="font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--fg-muted); margin-bottom: var(--sp-2); font-weight: 500;">
+                  Primary workloads <span style="text-transform: none; letter-spacing: 0; font-size: 13px; color: var(--fg-muted);">select all that apply</span>
+                </legend>
+                <div class="checkbox-group">
+                  <label class="checkbox-label"><input type="checkbox" name="workload-types" value="hpc" />HPC</label>
+                  <label class="checkbox-label"><input type="checkbox" name="workload-types" value="web-services" />Web services</label>
+                  <label class="checkbox-label"><input type="checkbox" name="workload-types" value="databases" />Databases</label>
+                  <label class="checkbox-label"><input type="checkbox" name="workload-types" value="ai-ml" />AI / ML</label>
+                  <label class="checkbox-label"><input type="checkbox" name="workload-types" value="mixed" />Mixed</label>
+                  <label class="checkbox-label"><input type="checkbox" name="workload-types" value="other-workload" />Other</label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="form-field">
+              <fieldset style="border: none; padding: 0;">
+                <legend style="font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--fg-muted); margin-bottom: var(--sp-2); font-weight: 500;">
+                  Infrastructure type <span style="text-transform: none; letter-spacing: 0; font-size: 13px; color: var(--fg-muted);">select all that apply</span>
+                </legend>
+                <div class="checkbox-group">
+                  <label class="checkbox-label"><input type="checkbox" name="infra-types" value="kubernetes" />Kubernetes</label>
+                  <label class="checkbox-label"><input type="checkbox" name="infra-types" value="bare-metal" />Bare metal</label>
+                  <label class="checkbox-label"><input type="checkbox" name="infra-types" value="containers" />Containers</label>
+                  <label class="checkbox-label"><input type="checkbox" name="infra-types" value="other-infra" />Other</label>
+                </div>
+              </fieldset>
+            </div>
+
+            <p class="form-section-heading">Context · 03</p>
+            <div class="form-field">
+              <label for="challenges">What performance challenges are you addressing? <span class="required">*</span></label>
+              <textarea id="challenges" name="challenges" rows="5" required placeholder="Describe the contention, failure, or utilisation issues you're seeing in your environment…"></textarea>
+            </div>
+
+            <div class="form-field">
+              <label for="timeframe">Preferred POC start <span class="required">*</span></label>
+              <select id="timeframe" name="timeframe" required>
+                <option value="" disabled selected>Select a timeframe</option>
+                <option value="30-days">Next 30 days</option>
+                <option value="1-2-months">1–2 months</option>
+                <option value="2-3-months">2–3 months</option>
+                <option value="3-plus-months">3+ months</option>
+              </select>
+            </div>
+
+            <button type="submit" class="button button-primary button-lg" style="width: 100%; margin-top: var(--sp-5);" data-analytics="form-submit">
+              Request POC <span class="arrow">→</span>
+            </button>
+
+            <p class="label" style="margin-top: var(--sp-4); text-align: center; color: var(--fg-muted);">
+              We review every request · reply within 48h
+            </p>
+
+          </form>
+        </div>
+
+        <aside style="position: sticky; top: 96px; display: flex; flex-direction: column; gap: var(--sp-6);">
+
+          <div class="card">
+            <p class="card-head">After you request · 30 days</p>
+            <div class="poc-timeline" role="list">
+              <div class="timeline-item" role="listitem">
+                <span class="timeline-week">Day 01–03</span>
+                <span class="timeline-text">Intro call and technical architecture review.</span>
+              </div>
+              <div class="timeline-item" role="listitem">
+                <span class="timeline-week">Day 04–07</span>
+                <span class="timeline-text">POC planning and baseline measurement design.</span>
+              </div>
+              <div class="timeline-item" role="listitem">
+                <span class="timeline-week">Day 08–14</span>
+                <span class="timeline-text">Baseline measurement period.</span>
+              </div>
+              <div class="timeline-item" role="listitem">
+                <span class="timeline-week">Day 15–28</span>
+                <span class="timeline-text">DensityOS active deployment.</span>
+              </div>
+              <div class="timeline-item" role="listitem">
+                <span class="timeline-week">Day 29–30</span>
+                <span class="timeline-text">Results analysis and decision.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <p class="card-head">Deliverables</p>
+            <ul class="deliverables-list">
+              <li><span class="marker">→</span><span>Baseline performance report</span></li>
+              <li><span class="marker">→</span><span>Active deployment performance report</span></li>
+              <li><span class="marker">→</span><span>Comparative analysis · throughput, P95, failures</span></li>
+              <li><span class="marker">→</span><span>Deployment runbook for your ops team</span></li>
+            </ul>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="brand" style="margin-bottom: var(--sp-2);">
+        <svg class="brand-mark" viewBox="0 0 128 140" aria-hidden="true">
+          <rect x="64" y="15" width="40" height="110" rx="7" ry="7" fill="none" stroke="currentColor" stroke-width="8" stroke-linejoin="round"></rect>
+          <line x1="64" y1="42.5" x2="104" y2="42.5" stroke="currentColor" stroke-width="8"></line>
+          <line x1="64" y1="70" x2="104" y2="70" stroke="currentColor" stroke-width="8"></line>
+          <line x1="64" y1="97.5" x2="104" y2="97.5" stroke="currentColor" stroke-width="8"></line>
+          <line x1="10" y1="42.5" x2="38" y2="42.5" stroke="currentColor" stroke-width="8" opacity="0.5" stroke-linecap="round"></line>
+          <line x1="10" y1="70" x2="38" y2="70" stroke="currentColor" stroke-width="8" opacity="0.5" stroke-linecap="round"></line>
+          <line x1="10" y1="97.5" x2="38" y2="97.5" stroke="currentColor" stroke-width="8" opacity="0.5" stroke-linecap="round"></line>
+          <line x1="112" y1="70" x2="126" y2="70" stroke="currentColor" stroke-width="8" stroke-linecap="round"></line>
+        </svg>
+        <span class="brand-wordmark">Density<em>OS</em></span>
+      </a>
+      <p class="footer-tag"><em>A timing layer for the data center you already own.</em></p>
+    </div>
+    <div class="footer-col">
+      <h5>Product</h5>
+      <ul>
+        <li><a href="for-data-centers.html">For data centers</a></li>
+        <li><a href="how-it-works.html">How it works</a></li>
+        <li><a href="poc-signup.html">Request POC</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">Acceltra GmbH</a></li>
+        <li><a href="#">Berlin, DE</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="https://acceltra.de/privacy.html" target="_blank" rel="noopener">Privacy</a></li>
+        <li><a href="https://acceltra.de/tos.html" target="_blank" rel="noopener">Terms</a></li>
+        <li><a href="https://acceltra.de/#contact" target="_blank" rel="noopener">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <span>© 2026 Acceltra GmbH · DensityOS</span>
+    <span>Infrastructure · Timing · Layer</span>
+  </div>
+</footer>
+
+<style>
+@media (max-width: 860px) {
+  .poc-layout { grid-template-columns: 1fr !important; }
+  aside { position: static !important; }
+}
+</style>
+
+<script src="script.js"></script>
+</body>
+</html>

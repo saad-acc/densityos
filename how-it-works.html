@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How it works — DensityOS</title>
+  <meta name="description" content="DensityOS operates at the host level to eliminate timing-based resource contention. No tenant code changes required." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav-container" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="brand" aria-label="DensityOS home">
+      <svg class="brand-mark" viewBox="0 0 128 140" aria-hidden="true">
+        <rect x="64" y="15" width="40" height="110" rx="7" ry="7" fill="none" stroke="currentColor" stroke-width="8" stroke-linejoin="round"></rect>
+        <line x1="64" y1="42.5" x2="104" y2="42.5" stroke="currentColor" stroke-width="8"></line>
+        <line x1="64" y1="70" x2="104" y2="70" stroke="currentColor" stroke-width="8"></line>
+        <line x1="64" y1="97.5" x2="104" y2="97.5" stroke="currentColor" stroke-width="8"></line>
+        <line x1="10" y1="42.5" x2="38" y2="42.5" stroke="currentColor" stroke-width="8" opacity="0.5" stroke-linecap="round"></line>
+        <line x1="10" y1="70" x2="38" y2="70" stroke="currentColor" stroke-width="8" opacity="0.5" stroke-linecap="round"></line>
+        <line x1="10" y1="97.5" x2="38" y2="97.5" stroke="currentColor" stroke-width="8" opacity="0.5" stroke-linecap="round"></line>
+        <line x1="112" y1="70" x2="126" y2="70" stroke="currentColor" stroke-width="8" stroke-linecap="round"></line>
+      </svg>
+      <span class="brand-wordmark">Density<em>OS</em></span>
+      <span class="brand-meta">Infrastructure · Timing · Layer</span>
+    </a>
+    <button class="nav-menu-btn" id="nav-menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="nav-links" id="nav-links">
+      <a href="for-data-centers.html">For data centers</a>
+      <a href="how-it-works.html" aria-current="page">How it works</a>
+      <a href="poc-signup.html" class="button button-primary" data-analytics="nav-request-poc">Request POC <span class="arrow">→</span></a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="container">
+      <span class="hero-kicker">Technical overview · 01</span>
+      <h1 id="hero-heading">Host-level timing <em>governance</em>.</h1>
+      <p class="hero-sub">DensityOS runs alongside your existing scheduler. It observes resource access patterns, detects where competing workloads would collide, and injects precise timing offsets to de-synchronise them. <em>No tenant code changes.</em></p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="mechanism-heading">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-kicker">Mechanism · 02</span>
+        <div>
+          <h2 id="mechanism-heading">How DensityOS eliminates contention.</h2>
+          <p class="section-sub">Three stages. Measurement throughout.</p>
+        </div>
+      </div>
+
+      <div class="steps" role="list">
+
+        <div class="step" role="listitem">
+          <div class="step-idx">Step<span class="num">01</span></div>
+          <div>
+            <h3 class="step-title">Observe.</h3>
+            <p class="step-text">DensityOS monitors resource contention at the host level — CPU, memory, network, disk. It builds a real-time map of when tenants access shared resources and identifies collision windows before they cause failures.</p>
+          </div>
+          <div class="step-diagram" aria-hidden="true">
+            <svg width="160" height="80" viewBox="0 0 160 80" fill="none">
+              <line x1="0" y1="40" x2="160" y2="40" stroke="currentColor" stroke-width="1" opacity="0.3" stroke-dasharray="3 4"/>
+              <circle cx="30" cy="40" r="4" fill="currentColor"/>
+              <circle cx="70" cy="40" r="4" fill="currentColor"/>
+              <circle cx="110" cy="40" r="4" fill="currentColor"/>
+              <circle cx="150" cy="40" r="4" fill="currentColor"/>
+              <line x1="30" y1="40" x2="30" y2="20" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="70" y1="40" x2="70" y2="10" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="110" y1="40" x2="110" y2="25" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="150" y1="40" x2="150" y2="18" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="step" role="listitem">
+          <div class="step-idx">Step<span class="num">02</span></div>
+          <div>
+            <h3 class="step-title">Decide.</h3>
+            <p class="step-text">DensityOS's decision logic is proprietary. It supervises the hardware timing window with a statistical-precision mechanism that eliminates queue build-up and contention before it forms — selecting micro-offsets that keep competing requests from converging on the same resource.</p>
+          </div>
+          <div class="step-diagram" aria-hidden="true">
+            <svg width="160" height="80" viewBox="0 0 160 80" fill="none">
+              <rect x="10" y="20" width="60" height="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="90" y="20" width="60" height="16" fill="currentColor" opacity="0.85"/>
+              <rect x="10" y="44" width="60" height="16" fill="currentColor" opacity="0.5"/>
+              <rect x="90" y="44" width="60" height="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="78" y1="28" x2="86" y2="28" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="78" y1="52" x2="86" y2="52" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="step" role="listitem">
+          <div class="step-idx">Step<span class="num">03</span></div>
+          <div>
+            <h3 class="step-title">Measure.</h3>
+            <p class="step-text">DensityOS continuously tracks throughput, failure rates, and resource utilisation. You can always see performance difference via your own telemetry setup.</p>
+          </div>
+          <div class="step-diagram" aria-hidden="true">
+            <svg width="160" height="80" viewBox="0 0 160 80" fill="none">
+              <rect x="10" y="50" width="14" height="20" fill="currentColor" opacity="0.4"/>
+              <rect x="34" y="40" width="14" height="30" fill="currentColor" opacity="0.5"/>
+              <rect x="58" y="28" width="14" height="42" fill="currentColor" opacity="0.6"/>
+              <rect x="82" y="20" width="14" height="50" fill="currentColor" opacity="0.75"/>
+              <rect x="106" y="12" width="14" height="58" fill="currentColor" opacity="0.9"/>
+              <rect x="130" y="8" width="14" height="62" fill="currentColor"/>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-surface" aria-labelledby="boundaries-heading">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-kicker">Boundaries · 03</span>
+        <div>
+          <h2 id="boundaries-heading">What DensityOS <em>does not</em> touch.</h2>
+          <p class="section-sub">DensityOS operates strictly at the host scheduling layer. It has no visibility into, and makes no changes to, anything tenant-facing.</p>
+        </div>
+      </div>
+
+      <ul class="boundary-list" aria-label="What DensityOS does not access or modify">
+        <li class="boundary-item">
+          <span class="boundary-mark">—</span>
+          <span>No tenant application code changes.</span>
+          <span class="boundary-meta">Tenant-side · Untouched</span>
+        </li>
+        <li class="boundary-item">
+          <span class="boundary-mark">—</span>
+          <span>No visibility into application payloads or tenant data.</span>
+          <span class="boundary-meta">Data · Isolated</span>
+        </li>
+        <li class="boundary-item">
+          <span class="boundary-mark">—</span>
+          <span>No VM-level access required.</span>
+          <span class="boundary-meta">VM · Untouched</span>
+        </li>
+        <li class="boundary-item">
+          <span class="boundary-mark">—</span>
+          <span>Works regardless of tenant workload types.</span>
+          <span class="boundary-meta">Workload · Agnostic</span>
+        </li>
+        <li class="boundary-item">
+          <span class="boundary-mark">—</span>
+          <span>No changes to execution order, only timing offsets.</span>
+          <span class="boundary-meta">Order · Preserved</span>
+        </li>
+      </ul>
+
+      <div class="info-box" style="margin-top: var(--sp-7);">
+        <p><strong>Tenant isolation is preserved.</strong> DensityOS operates on scheduling metadata, not workload content. Tenants cannot observe each other through DensityOS, and DensityOS cannot observe tenants' data.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="compat-heading">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-kicker">Deployment · 04</span>
+        <div>
+          <h2 id="compat-heading">Compatible infrastructure.</h2>
+          <p class="section-sub">DensityOS integrates with standard data-center and cloud infrastructure. Deployment approach is determined during POC planning based on your environment.</p>
+        </div>
+      </div>
+
+      <div class="badge-grid" role="list">
+        <span class="badge" role="listitem">Kubernetes</span>
+        <span class="badge" role="listitem">Bare metal</span>
+        <span class="badge" role="listitem">Containerised</span>
+        <span class="badge" role="listitem">Multi-tenant hosting</span>
+        <span class="badge" role="listitem">Colo · Enterprise DC</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" aria-labelledby="cta-heading">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-kicker">Next · 05</span>
+        <div>
+          <h2 id="cta-heading">Measure results <em>in your environment</em>.</h2>
+          <p class="section-sub">We work with a limited number of data-center operators to validate DensityOS across different infrastructure profiles.</p>
+        </div>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; gap: var(--sp-5); flex-wrap: wrap;">
+        <p class="label">Limited POC availability · 2026</p>
+        <a href="poc-signup.html" class="button button-primary button-lg" data-analytics="hiw-request-poc">Request POC <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="brand" style="margin-bottom: var(--sp-2);">
+        <svg class="brand-mark" viewBox="0 0 128 140" aria-hidden="true">
+          <rect x="64" y="15" width="40" height="110" rx="7" ry="7" fill="none" stroke="currentColor" stroke-width="8" stroke-linejoin="round"></rect>
+          <line x1="64" y1="42.5" x2="104" y2="42.5" stroke="currentColor" stroke-width="8"></line>
+          <line x1="64" y1="70" x2="104" y2="70" stroke="currentColor" stroke-width="8"></line>
+          <line x1="64" y1="97.5" x2="104" y2="97.5" stroke="currentColor" stroke-width="8"></line>
+          <line x1="10" y1="42.5" x2="38" y2="42.5" stroke="currentColor" stroke-width="8" opacity="0.5" stroke-linecap="round"></line>
+          <line x1="10" y1="70" x2="38" y2="70" stroke="currentColor" stroke-width="8" opacity="0.5" stroke-linecap="round"></line>
+          <line x1="10" y1="97.5" x2="38" y2="97.5" stroke="currentColor" stroke-width="8" opacity="0.5" stroke-linecap="round"></line>
+          <line x1="112" y1="70" x2="126" y2="70" stroke="currentColor" stroke-width="8" stroke-linecap="round"></line>
+        </svg>
+        <span class="brand-wordmark">Density<em>OS</em></span>
+      </a>
+      <p class="footer-tag"><em>A timing layer for the data center you already own.</em></p>
+    </div>
+    <div class="footer-col">
+      <h5>Product</h5>
+      <ul>
+        <li><a href="for-data-centers.html">For data centers</a></li>
+        <li><a href="how-it-works.html">How it works</a></li>
+        <li><a href="poc-signup.html">Request POC</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">Acceltra GmbH</a></li>
+        <li><a href="#">Berlin, DE</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="https://acceltra.de/privacy.html" target="_blank" rel="noopener">Privacy</a></li>
+        <li><a href="https://acceltra.de/tos.html" target="_blank" rel="noopener">Terms</a></li>
+        <li><a href="https://acceltra.de/#contact" target="_blank" rel="noopener">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <span>© 2026 Acceltra GmbH · DensityOS</span>
+    <span>Infrastructure · Timing · Layer</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

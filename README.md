@@ -25,7 +25,7 @@ Built by [Acceltra GmbH](https://acceltra.de), Berlin.
 ├── poc-signup.html         # POC request form
 ├── styles.css              # Shared Signal design system + all component styles
 ├── script.js               # Shared interactions (nav, calculators, accordions)
-├── assets/                 # SVG logo marks
+├── README.md               # Project overview and workflow
 └── CNAME                   # Custom domain config
 ```
 
@@ -36,3 +36,18 @@ Uses the **Signal** design system — IBM Plex Sans + IBM Plex Mono + JetBrains 
 ## Deployment
 
 Hosted on GitHub Pages. The `CNAME` file points to the custom domain.
+
+## Local Development
+
+This is a static site, so no build step is required.
+
+- Open `index.html` directly in the browser, or serve the folder with a simple static server.
+- Validate navigation across all pages after each content update.
+- Confirm footer legal/contact links and CTA paths before committing.
+
+## Version Control Workflow
+
+- Keep work in feature branches (for example: `feature/update-poc-copy`).
+- Commit small, focused changes with clear messages.
+- Push branch and open a pull request to `main`.
+- Review links and page navigation as part of PR checks before merge.
